@@ -3,6 +3,10 @@
 Alice Music can free download music from zingmp3 or nhaccuatui, of course, you can listen music online...
 Hope you enjoy it...(if you have any question about alice music, please contact me with wangcongyinga@gmail.com)
 
+
+You can access alice music via ip address http://123.57.137.250/
+
+
 You can input your music link from zingmp3(https://mp3.zing.vn/) or nhaccuatui(https://www.nhaccuatui.com/bai-hat/bai-hat-moi.html) and click get link button, then you can get music...
 
 
