@@ -1,0 +1,6 @@
+.pyc
+.idea
+*.log
+venv
+*.tar.gz
+__pycache__
