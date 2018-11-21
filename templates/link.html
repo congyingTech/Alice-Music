@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>Get Music from Zing MP3 or Nhaccuatui</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css">
+  <link href="static/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <meta property="og:title" content="Get link lossless Zing MP3, Nhaccuatui, SoundCloud"/>
+  <meta property="og:url" content="https://mp3zing.download"/>
+  <meta property="og:description" content="Get link 320Kbps, lossless Zing MP3, Nhaccuatui, SoundCloud" />
+  <meta property="og:image" content="https://i.imgur.com/aXNCSZ8.png" />
+  <meta property="fb:app_id" content="1591404170883193"/>
+  <link rel="apple-touch-icon" sizes="57x57" href="/static/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/static/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/static/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/static/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/static/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/static/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/static/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/static/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/static/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/static/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png">
+  <link rel="manifest" href="/static/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/static/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+</head>
+<body>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.6.0/APlayer.min.js"></script>
+  <nav class="grey darken-4" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Music Download</a></div>
+  </nav>
+  <div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+      <br><br>
+      <h1 class="header center orange-text">Alice-Music</h1>
+      <div class="row center">
+        <h5 class="header col s12 light">Get Music from Zing MP3 or Nhaccuatui</h5>
+      </div>
+      <div class="row center">
+        <div class="input-field col s12">
+          {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+              {% for category, message in messages %}
+                {% if 'link' in category : %}
+                  <a class="waves-effect waves-light btn" href="{{ message }}"><i class="material-icons right">send</i>Redirect Link</a>
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          {% endwith %}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <ul class="collapsible" data-collapsible="accordion">
+      <li>
+        <div class="collapsible-header"><i class="material-icons">announcement</i>Tips</div>
+        <div class="collapsible-body"><span>Email to wangcongyinga@gmail.com to ask your questions about alice music.</span></div>
+      </li>
+    </ul>
+    <br><br>
+  </div>
+  <footer class="page-footer grey darken-4">
+    <div class="footer-copyright">
+      <div class="container">
+        <p class="grey-text text-lighten-4">Made by <a href="https://twitter.com/Mohn_leo" rel="nofollow">Mohn</a>. Contact her at <a href="mailto:wangcongyinga@gmail.com">wangcongyinga@gmail.com</a>.</p>
+      </div>
+    </div>
+  </footer>
+
+
+  <!--  Scripts-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
+  <script src="static/js/init.js"></script>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        {% if 'success' in category or 'error' in category or 'fail' in category or 'copyright' in category: %}
+          <script type="text/javascript">
+            $(document).ready(function(){
+              Materialize.toast('{{ message }}', 5000)
+              });
+          </script>
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+  </body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>Get Music from Zing MP3 or Nhaccuatui</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css">
+  <link href="static/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <meta property="og:title" content="Get link lossless Zing MP3, Nhaccuatui"/>
+  <meta property="og:url" content="https://mp3zing.download"/>
+  <meta property="og:description" content="Get link 320Kbps, lossless Zing MP3, Nhaccuatui" />
+  <meta property="og:image" content="https://i.imgur.com/aXNCSZ8.png" />
+  <meta property="fb:app_id" content="1591404170883193"/>
+  <link rel="apple-touch-icon" sizes="57x57" href="/static/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/static/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/static/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/static/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/static/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/static/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/static/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/static/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/static/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/static/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png">
+  <link rel="manifest" href="/static/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/static/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+</head>
+<body>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.6.0/APlayer.min.js"></script>
+  <nav class="grey darken-4" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Music Download</a></div>
+  </nav>
+  <div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+      <br><br>
+      <h1 class="header center orange-text">Alice-Music</h1>
+      <div class="row center">
+        <h5 class="header col s12 light">Get link Zing MP3, Nhaccuatui</h5>
+      </div>
+      <div class="row center">
+        <div class="input-field col s12">
+          <form action="" method="post" role="form">
+            {{ form.csrf_token }}
+            {{ form.link(class_="validate") }}
+            <label for="link">Input Link</label>
+            <button id = "btnSubmit" class="btn waves-effect waves-light" type="submit" name="action">Get Link
+            <i class="material-icons right">send</i>
+            </button>
+          </form>
+        </div>
+      </div>
+      <br>
+      <div class="row center loading">       
+      </div>
+      <div class="row center">
+        <div class="col s2"></div>
+        <div class="col s8">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                <ul class="collection with-header">
+                {% for category, message in messages %}
+                  {% if '128Kbps' in category or '320Kbps' in category or 'Lossless' in category : %}
+                    <li class="collection-item"><div><span class="new badge" data-badge-caption="{{ category }}"></span>Download Music<a href="{{ message }}" class="secondary-content"><i class="material-icons">file_download</i></a></div></li>
+                  {% endif %}
+                  {% if 'linksc' in category : %}   
+                    <li class="collection-item"><div><span class="new badge" data-badge-caption="128 Kbps"></span>Download Music<a href="{{ message }}" class="secondary-content"><i class="material-icons">file_download</i></a></div></li>
+                  {% endif %}
+                  {% if 'fslink' in category : %}
+                    <li class="collection-item"><div><span class="new badge" data-badge-caption="Direct-Link"></span>Download File<a href="{{ message }}" class="secondary-content"><i class="material-icons">file_download</i></a></div></li>
+                  {% endif %}
+                  {% if 'link4share' in category : %}
+                    <li class="collection-item"><div><span class="new badge" data-badge-caption="Direct-Link"></span>Click here to download<a href="{{ message }}" class="secondary-content"><i class="material-icons">file_download</i></a></div></li>
+                  {% endif %}
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+          </ul>
+        <div class="col s2"></div>
+        <br>
+        <div class="col s12">
+        <div id="player1" class="aplayer"></div>
+        </div>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    {% if 'player' in category: %}
+                        <script>
+                            var ap1 = new APlayer({
+                            element: document.getElementById('player1'),
+                            narrow: false,
+                            autoplay: true,
+                            showlrc: false,
+                            mutex: true,
+                            theme: '#e6d0b2',
+                            preload: 'metadata',
+                            mode: 'circulation',
+                            music: {
+                            {% with urls = get_flashed_messages(category_filter=["title"]) %}
+                                {% if urls %}
+                                    {%- for msg in urls %}
+                                        title: '{{ msg }}',
+                                    {% endfor -%}
+                                {% endif %}
+                            {% endwith %}
+                            {% with urls = get_flashed_messages(category_filter=["artist"]) %}
+                                {% if urls %}
+                                    {%- for msg in urls %}
+                                        author: '{{ msg }}',
+                                    {% endfor -%}
+                                {% endif %}
+                            {% endwith %}
+                            {% with urls = get_flashed_messages(category_filter=["player"]) %}
+                                {% if urls %}
+                                    {%- for msg in urls %}
+                                        url: '{{ msg | safe }}',
+                                    {% endfor -%}
+                                {% endif %}
+                            {% endwith %}   
+                            {% with urls = get_flashed_messages(category_filter=["thumbnail"]) %}
+                                {% if urls %}
+                                    {%- for msg in urls %}
+                                        pic: '{{ msg }}'
+                                    {% endfor -%}
+                                {% endif %}
+                            {% endwith %}
+                            }
+                            });
+
+                            ap1.on('play', function () {
+                                console.log('play');
+                            });
+                            ap1.on('play', function () {
+                                console.log('play play');
+                            });
+                            ap1.on('pause', function () {
+                                console.log('pause');
+                            });
+                            ap1.on('canplay', function () {
+                                console.log('canplay');
+                            });
+                            ap1.on('playing', function () {
+                                console.log('playing');
+                            });
+                            ap1.on('ended', function () {
+                                console.log('ended');
+                            });
+                            ap1.on('error', function () {
+                                console.log('error');
+                            });
+                        </script>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <ul class="collapsible" data-collapsible="accordion">
+      <li>
+        <div class="collapsible-header"><i class="material-icons">announcement</i>Tips</div>
+        <div class="collapsible-body"><span>Email to wangcongyinga@gmail.com to ask your questions about alice music.</span></div>
+      </li>
+    </ul>
+    <br><br>
+  </div>
+  <footer class="page-footer grey darken-4">
+    <div class="footer-copyright">
+      <div class="container">
+        <p class="grey-text text-lighten-4">Made by <a href="https://twitter.com/Mohn_leo" rel="nofollow">Mohn</a>. Contact her at <a href="mailto:wangcongyinga@gmail.com">wangcongyinga@gmail.com</a>.</p>
+      </div>
+    </div>
+  </footer>
+
+
+  <!--  Scripts-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
+  <script src="static/js/init.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $("#btnSubmit").click(function(){
+        if ($("#load").length == 0){
+          $( ".loading" ).append('<div id="load" class="preloader-wrapper small active"><div class="spinner-layer spinner-green-only"><div class="circle-clipper left"><div class="circle"></div></div><div class="gap-patch"><div class="circle"></div></div><div class="circle-clipper right"><div class="circle"></div></div></div></div>');
+        }
+      });
+      $("#load").remove();
+    });   
+  </script>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        {% if 'success' in category or 'error' in category or 'fail' in category or 'copyright' in category: %}
+          <script type="text/javascript">
+            $(document).ready(function(){
+              Materialize.toast('{{ message }}', 5000)
+              });
+          </script>
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+  </body>
+</html>
